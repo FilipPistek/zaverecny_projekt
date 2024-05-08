@@ -22,9 +22,11 @@ public class Game extends JPanel implements Runnable {
 
     Thread gameThread;
     KeyBinds keyBinds = new KeyBinds();
-    public Player player = new Player(this, keyBinds);
     TileUtility tileUtility = new TileUtility(this);
+    Sound sound = new Sound();
+    public Player player = new Player(this, keyBinds);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+
 
     public Game() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -38,6 +40,11 @@ public class Game extends JPanel implements Runnable {
 
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void setupGame() {
+
+        playMusic(0);
     }
 
     @Override
@@ -81,5 +88,23 @@ public class Game extends JPanel implements Runnable {
         tileUtility.drawTile(graphics2D);
         player.drawPlayer(graphics2D);
         graphics2D.dispose();
+    }
+
+    public void playMusic(int i) {
+
+        sound.setFileSound(i);
+        sound.playSound();
+        sound.loopSound();
+    }
+
+    public void stopMusic() {
+
+        sound.stopSound();
+    }
+
+    public void playSoundEffect(int i) {
+
+        sound.setFileSound(i);
+        sound.playSound();
     }
 }
