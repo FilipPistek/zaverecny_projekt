@@ -86,9 +86,9 @@ public class TileUtility {
             int screenY = worldY - game.player.worldY + game.player.screenY;
 
             if (worldX + game.tileSize > game.player.worldX - game.player.screenX &&
-                worldX - game.tileSize < game.player.worldX + game.player.screenX &&
+                worldX - game.tileSize - game.tileSize < game.player.worldX + game.player.screenX &&
                 worldY + game.tileSize > game.player.worldY - game.player.screenY &&
-                worldY - game.tileSize < game.player.worldY + game.player.screenY) {
+                worldY - game.tileSize - game.tileSize < game.player.worldY + game.player.screenY) {
 
                 graphics2D.drawImage(tile[tileNum].image, screenX, screenY, game.tileSize, game.tileSize, null);
             }
