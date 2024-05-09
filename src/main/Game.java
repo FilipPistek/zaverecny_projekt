@@ -23,7 +23,8 @@ public class Game extends JPanel implements Runnable {
     Thread gameThread;
     KeyBinds keyBinds = new KeyBinds();
     TileUtility tileUtility = new TileUtility(this);
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound soundEffect = new Sound();
     public Player player = new Player(this, keyBinds);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
@@ -92,19 +93,19 @@ public class Game extends JPanel implements Runnable {
 
     public void playMusic(int i) {
 
-        sound.setFileSound(i);
-        sound.playSound();
-        sound.loopSound();
+        music.setFileSound(i);
+        music.playSound();
+        music.loopSound();
     }
 
     public void stopMusic() {
 
-        sound.stopSound();
+        music.stopSound();
     }
 
     public void playSoundEffect(int i) {
 
-        sound.setFileSound(i);
-        sound.playSound();
+        soundEffect.setFileSound(i);
+        soundEffect.playSound();
     }
 }
