@@ -5,7 +5,14 @@ import java.awt.event.KeyListener;
 
 public class KeyBinds implements KeyListener {
 
+    Game game;
+
     public boolean up, down, left, right;
+    boolean drawTime = false;
+
+    public KeyBinds(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void keyTyped(KeyEvent k) {
@@ -28,6 +35,13 @@ public class KeyBinds implements KeyListener {
         }
         if (keyCode == KeyEvent.VK_D) {
             right = true;
+        }
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            if (game.gameState == game.playState) {
+                game.gameState = game.pauseState;
+            } else if (game.gameState == game.pauseState) {
+                game.gameState = game.playState;
+            }
         }
     }
 

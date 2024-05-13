@@ -20,11 +20,17 @@ public class Game extends JPanel implements Runnable {
 
     public int fps = 60;
 
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 0;
+
+
     Thread gameThread;
-    KeyBinds keyBinds = new KeyBinds();
+    KeyBinds keyBinds = new KeyBinds(this);
     TileUtility tileUtility = new TileUtility(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
+    UI ui = new UI(this);
     public Player player = new Player(this, keyBinds);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
@@ -46,6 +52,8 @@ public class Game extends JPanel implements Runnable {
     public void setupGame() {
 
         playMusic(0);
+        stopMusic();
+        gameState = playState;
     }
 
     @Override
@@ -77,8 +85,12 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
+        if (gameState == playState) {
+            player.update();
+        }
+        if (gameState == pauseState) {
 
-        player.update();
+        }
     }
 
     public void paintComponent(Graphics graphics) {
@@ -88,6 +100,7 @@ public class Game extends JPanel implements Runnable {
 
         tileUtility.drawTile(graphics2D);
         player.drawPlayer(graphics2D);
+        ui.draw(graphics2D);
         graphics2D.dispose();
     }
 
