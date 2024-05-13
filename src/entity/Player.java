@@ -3,13 +3,10 @@ package entity;
 import main.KeyBinds;
 import main.Game;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Player extends Entity {
-    Game game;
     KeyBinds keyBinds;
 
     public final int screenX;
@@ -17,7 +14,7 @@ public class Player extends Entity {
 
     public Player(Game game, KeyBinds keyBinds) {
 
-        this.game = game;
+        super(game);
         this.keyBinds = keyBinds;
 
         screenX = game.screenWidth/2 - game.tileSize/2;
@@ -37,33 +34,31 @@ public class Player extends Entity {
 
     public void setDefaultPosition() {
 
-        worldX = game.tileSize * 12;
-        worldY = game.tileSize * 9;
-        movementSpeed = 4;
+        worldX = game.tileSize * 25;
+        worldY = game.tileSize * 30;
+        movementSpeed = 3;
         direction = "down";
     }
 
     public void getPlayerImage() {
 
-        try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/knight_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/knight_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/knight_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/knight_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/knight_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/knight_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/knight_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/knight_right_2.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        up1 = setupEntityImage("/player/knight_up_1");
+        up2 = setupEntityImage("/player/knight_up_2");
+        down1 = setupEntityImage("/player/knight_down_1");
+        down2 = setupEntityImage("/player/knight_down_2");
+        left1 = setupEntityImage("/player/knight_left_1");
+        left2 = setupEntityImage("/player/knight_left_2");
+        right1 = setupEntityImage("/player/knight_right_1");
+        right2 = setupEntityImage("/player/knight_right_2");
     }
 
     public void update() {
 
         if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true) {
+
             if (keyBinds.up == true) {
                 direction = "up";
+
             } else if (keyBinds.down == true) {
                 direction = "down";
 
@@ -144,6 +139,6 @@ public class Player extends Entity {
                 }
                 break;
         }
-        graphics2D.drawImage(image, screenX, screenY, game.tileSize, game.tileSize, null);
+        graphics2D.drawImage(image, screenX, screenY, null);
     }
 }

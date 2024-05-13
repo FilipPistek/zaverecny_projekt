@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import tile.TileUtility;
 
@@ -31,7 +32,9 @@ public class Game extends JPanel implements Runnable {
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     UI ui = new UI(this);
+    AssetSetup assetSetup = new AssetSetup(this);
     public Player player = new Player(this, keyBinds);
+    public Entity npc[] = new Entity[10];
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
@@ -51,8 +54,8 @@ public class Game extends JPanel implements Runnable {
 
     public void setupGame() {
 
+        assetSetup.setupNPC();
         playMusic(0);
-        stopMusic();
         gameState = playState;
     }
 
@@ -85,8 +88,15 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
+
         if (gameState == playState) {
             player.update();
+
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    npc[i].update();
+                }
+            }
         }
         if (gameState == pauseState) {
 
@@ -99,8 +109,17 @@ public class Game extends JPanel implements Runnable {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
         tileUtility.drawTile(graphics2D);
+
         player.drawPlayer(graphics2D);
+
+        for (int i = 0; i < npc.length; i++) {
+            if (npc[i] != null) {
+                npc[i].draw(graphics2D);
+            }
+        }
+
         ui.drawUI(graphics2D);
+
         graphics2D.dispose();
     }
 

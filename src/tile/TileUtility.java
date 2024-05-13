@@ -1,5 +1,6 @@
 package tile;
 
+import main.DrawHelper;
 import main.Game;
 
 import javax.imageio.ImageIO;
@@ -27,16 +28,21 @@ public class TileUtility {
 
     public void getTileImage() {
 
+        setupTileImage(0, "grass", false);
+        setupTileImage(1, "dirt", false);
+        setupTileImage(2, "pine_tree", true);
+    }
+
+    public void setupTileImage(int index, String name, boolean collision) {
+
+        DrawHelper drawHelper = new DrawHelper();
+
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/dirt.png"));
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tile/" + name + ".png"));
+            tile[index].image = drawHelper.scaleImage(tile[index].image, game.tileSize, game.tileSize);
+            tile[index].tileCollision = collision;
 
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/pine_tree.png"));
-            tile[2].tileCollision = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,7 +96,7 @@ public class TileUtility {
                 worldY + game.tileSize > game.player.worldY - game.player.screenY &&
                 worldY - game.tileSize - game.tileSize < game.player.worldY + game.player.screenY) {
 
-                graphics2D.drawImage(tile[tileNum].image, screenX, screenY, game.tileSize, game.tileSize, null);
+                graphics2D.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
 
             worldColumn++;
