@@ -100,7 +100,7 @@ public class Game extends JPanel implements Runnable {
 
         tileUtility.drawTile(graphics2D);
         player.drawPlayer(graphics2D);
-        ui.draw(graphics2D);
+        ui.drawUI(graphics2D);
         graphics2D.dispose();
     }
 
