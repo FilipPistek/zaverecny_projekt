@@ -25,6 +25,14 @@ public class Entity {
 
     public Entity(Game game) {
         this.game = game;
+
+        hitBox = new Rectangle();
+        hitBox.x = 8;
+        hitBox.y = 16;
+        hitBoxDefaultX = hitBox.x;
+        hitBoxDefaultY = hitBox.y;
+        hitBox.width = 32;
+        hitBox.height = 32;
     }
 
     public void setAction() {
@@ -36,6 +44,7 @@ public class Entity {
         setAction();
         entityCollision = false;
         game.collisionChecker.checkTile(this);
+        game.collisionChecker.checkPlayer(this);
 
         if (entityCollision == false) {
             switch (direction) {

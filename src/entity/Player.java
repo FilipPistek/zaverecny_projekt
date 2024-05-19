@@ -20,14 +20,6 @@ public class Player extends Entity {
         screenX = game.screenWidth/2 - game.tileSize/2;
         screenY = game.screenHeight/2 - game.tileSize;
 
-        hitBox = new Rectangle();
-        hitBox.x = 8;
-        hitBox.y = 16;
-        hitBoxDefaultX = hitBox.x;
-        hitBoxDefaultY = hitBox.y;
-        hitBox.width = 32;
-        hitBox.height = 32;
-
         setDefaultPosition();
         getPlayerImage();
     }
@@ -72,6 +64,10 @@ public class Player extends Entity {
             entityCollision = false;
             game.collisionChecker.checkTile(this);
 
+            int npcIndex = game.collisionChecker.checkEntity(this, game.npc);
+            npcInteraction(npcIndex);
+
+
             if (entityCollision == false) {
                 switch (direction) {
                     case "up":
@@ -98,6 +94,11 @@ public class Player extends Entity {
                 }
                 imageCounter = 0;
             }
+        }
+    }
+
+    public void npcInteraction(int i) {
+        if (i != 999) {
         }
     }
 

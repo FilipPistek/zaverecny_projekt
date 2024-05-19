@@ -35,6 +35,7 @@ public class Game extends JPanel implements Runnable {
     AssetSetup assetSetup = new AssetSetup(this);
     public Player player = new Player(this, keyBinds);
     public Entity npc[] = new Entity[10];
+    public Object object[] = new Object[10];
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
