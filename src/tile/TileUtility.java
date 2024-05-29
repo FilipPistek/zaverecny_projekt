@@ -17,7 +17,6 @@ public class TileUtility {
     public int mapTileXY[][];
 
     public TileUtility(Game game) {
-
         this.game = game;
         tile = new Tile[10];
         mapTileXY = new int[game.maxWorldColumn][game.maxWorldRow];
@@ -27,14 +26,12 @@ public class TileUtility {
     }
 
     public void getTileImage() {
-
         setupTileImage(0, "grass", false);
         setupTileImage(1, "dirt", false);
         setupTileImage(2, "pine_tree", true);
     }
 
     public void setupTileImage(int index, String name, boolean collision) {
-
         DrawHelper drawHelper = new DrawHelper();
 
         try {
@@ -49,7 +46,6 @@ public class TileUtility {
     }
 
     public void loadMap(String filePath) {
-
         try {
             InputStream inputStream = getClass().getResourceAsStream(filePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -79,7 +75,6 @@ public class TileUtility {
     }
 
     public void drawTile(Graphics2D graphics2D) {
-
         int worldColumn = 0;
         int worldRow = 0;
 

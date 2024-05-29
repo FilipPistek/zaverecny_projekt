@@ -11,7 +11,6 @@ public class Sound {
     URL soundURL[] = new URL[10];
 
     public Sound() {
-
         soundURL[0] = getClass().getResource("/sound/undertale_ruins.wav");
         soundURL[1] = getClass().getResource("/sound/damage.wav");
         soundURL[2] = getClass().getResource("/sound/healing.wav");
@@ -21,7 +20,6 @@ public class Sound {
     }
 
     public void setFileSound(int i) {
-
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
@@ -32,17 +30,14 @@ public class Sound {
     }
 
     public void playSound() {
-
         clip.start();
     }
 
     public void loopSound() {
-
         clip.loop(clip.LOOP_CONTINUOUSLY);
     }
 
     public void stopSound() {
-
         clip.stop();
     }
 }

@@ -18,24 +18,21 @@ public class Game extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow;
     public final int maxWorldColumn = 100;
     public final int maxWorldRow = 100;
-
     public int fps = 60;
-
     public int gameState;
-    public final int playState = 1;
     public final int pauseState = 0;
-
+    public final int playState = 1;
+    public final int talkingState = 2;
 
     Thread gameThread;
-    KeyBinds keyBinds = new KeyBinds(this);
+    public KeyBinds keyBinds = new KeyBinds(this);
     TileUtility tileUtility = new TileUtility(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
-    UI ui = new UI(this);
+    public UI ui = new UI(this);
     AssetSetup assetSetup = new AssetSetup(this);
     public Player player = new Player(this, keyBinds);
     public Entity npc[] = new Entity[10];
-    public Object object[] = new Object[10];
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
@@ -48,13 +45,11 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void startGameThread() {
-
         gameThread = new Thread(this);
         gameThread.start();
     }
 
     public void setupGame() {
-
         assetSetup.setupNPC();
         playMusic(0);
         gameState = playState;
@@ -62,7 +57,6 @@ public class Game extends JPanel implements Runnable {
 
     @Override
     public void run() {
-
         double interval = 1000000000 / fps;
         double nextInterval = System.nanoTime() + interval;
 
@@ -89,7 +83,6 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
-
         if (gameState == playState) {
             player.update();
 
@@ -105,39 +98,32 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void paintComponent(Graphics graphics) {
-
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
         tileUtility.drawTile(graphics2D);
-
         player.drawPlayer(graphics2D);
-
         for (int i = 0; i < npc.length; i++) {
             if (npc[i] != null) {
                 npc[i].draw(graphics2D);
             }
         }
-
         ui.drawUI(graphics2D);
 
         graphics2D.dispose();
     }
 
     public void playMusic(int i) {
-
         music.setFileSound(i);
         music.playSound();
         music.loopSound();
     }
 
     public void stopMusic() {
-
         music.stopSound();
     }
 
     public void playSoundEffect(int i) {
-
         soundEffect.setFileSound(i);
         soundEffect.playSound();
     }

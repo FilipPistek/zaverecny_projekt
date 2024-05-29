@@ -22,25 +22,43 @@ public class Entity {
     public int hitBoxDefaultX, hitBoxDefaultY;
     public boolean entityCollision = false;
     public int actionHold = 0;
+    String text[] = new String[20];
+    int textIndex = 0;
 
     public Entity(Game game) {
         this.game = game;
 
         hitBox = new Rectangle();
-        hitBox.x = 8;
-        hitBox.y = 16;
-        hitBoxDefaultX = hitBox.x;
-        hitBoxDefaultY = hitBox.y;
-        hitBox.width = 32;
-        hitBox.height = 32;
     }
 
     public void setAction() {
 
     }
 
-    public void update() {
+    public void speak() {
+        if (text[textIndex] == null) {
+            textIndex = 0;
+        }
+        game.ui.currentText = text[textIndex];
+        textIndex++;
 
+        switch (game.player.direction) {
+            case "up":
+                direction = "down";
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left":
+                direction = "right";
+                break;
+            case "right":
+                direction = "left";
+                break;
+        }
+    }
+
+    public void update() {
         setAction();
         entityCollision = false;
         game.collisionChecker.checkTile(this);
@@ -75,7 +93,6 @@ public class Entity {
     }
 
     public void draw(Graphics2D graphics2D) {
-
         int screenX = worldX - game.player.worldX + game.player.screenX;
         int screenY = worldY - game.player.worldY + game.player.screenY;
 
@@ -126,7 +143,6 @@ public class Entity {
     }
 
     public BufferedImage setupEntityImage(String ImageName) {
-
         DrawHelper drawHelper = new DrawHelper();
         BufferedImage image = null;
 

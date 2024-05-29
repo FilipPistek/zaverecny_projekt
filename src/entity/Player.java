@@ -13,19 +13,24 @@ public class Player extends Entity {
     public final int screenY;
 
     public Player(Game game, KeyBinds keyBinds) {
-
         super(game);
         this.keyBinds = keyBinds;
 
         screenX = game.screenWidth/2 - game.tileSize/2;
         screenY = game.screenHeight/2 - game.tileSize;
 
+        hitBox.x = 8;
+        hitBox.y = 16;
+        hitBoxDefaultX = hitBox.x;
+        hitBoxDefaultY = hitBox.y;
+        hitBox.width = 30;
+        hitBox.height = 32;
+
         setDefaultPosition();
         getPlayerImage();
     }
 
     public void setDefaultPosition() {
-
         worldX = game.tileSize * 25;
         worldY = game.tileSize * 30;
         movementSpeed = 3;
@@ -33,7 +38,6 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-
         up1 = setupEntityImage("/player/knight_up_1");
         up2 = setupEntityImage("/player/knight_up_2");
         down1 = setupEntityImage("/player/knight_down_1");
@@ -45,7 +49,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-
         if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true) {
 
             if (keyBinds.up == true) {
@@ -66,7 +69,6 @@ public class Player extends Entity {
 
             int npcIndex = game.collisionChecker.checkEntity(this, game.npc);
             npcInteraction(npcIndex);
-
 
             if (entityCollision == false) {
                 switch (direction) {
@@ -99,11 +101,15 @@ public class Player extends Entity {
 
     public void npcInteraction(int i) {
         if (i != 999) {
+            if (game.keyBinds.e == true) {
+                game.gameState = game.talkingState;
+                game.npc[i].speak();
+            }
         }
+        game.keyBinds.e = false;
     }
 
     public void drawPlayer(Graphics2D graphics2D) {
-
         BufferedImage image = null;
 
         switch (direction) {

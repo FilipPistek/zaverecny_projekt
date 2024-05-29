@@ -10,13 +10,20 @@ public class NPC extends Entity {
         super(game);
 
         direction = "down";
-        movementSpeed = 1;
+        movementSpeed = 0;
+
+        hitBox.x = 8;
+        hitBox.y = 16;
+        hitBoxDefaultX = hitBox.x;
+        hitBoxDefaultY = hitBox.y;
+        hitBox.width = 30;
+        hitBox.height = 32;
 
         getNPCImage();
+        setDialogue();
     }
 
     public void getNPCImage() {
-
         up1 = setupEntityImage("/player/knight_up_1");
         up2 = setupEntityImage("/player/knight_up_2");
         down1 = setupEntityImage("/player/knight_down_1");
@@ -27,8 +34,12 @@ public class NPC extends Entity {
         right2 = setupEntityImage("/player/knight_right_2");
     }
 
-    public void setAction() {
+    public void setDialogue() {
+        text[0] = "Hello. You look seem lost. You aren't from this place are you?";
+        text[1] = "By the way, the name's Arthur.";
+    }
 
+    public void setAction() {
         actionHold ++;
 
         if (actionHold == 120) {
@@ -49,5 +60,9 @@ public class NPC extends Entity {
             }
             actionHold = 0;
         }
+    }
+
+    public void speak() {
+        super.speak();
     }
 }

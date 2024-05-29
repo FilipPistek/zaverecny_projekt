@@ -7,12 +7,10 @@ public class CollisionChecker {
     Game game;
 
     public CollisionChecker(Game game) {
-
         this.game = game;
     }
 
     public void checkTile(Entity entity) {
-
         int entityLeftWorldX = entity.worldX + entity.hitBox.x;
         int entityRightWorldX = entity.worldX + entity.hitBox.x + entity.hitBox.width;
         int entityTopWorldY = entity.worldY + entity.hitBox.y;
@@ -26,7 +24,6 @@ public class CollisionChecker {
         int tileNumber1, tileNumber2;
 
         switch (entity.direction) {
-
             case "up":
                 entityTopRow = (entityTopWorldY - entity.movementSpeed) / game.tileSize;
                 tileNumber1 = game.tileUtility.mapTileXY[entityLeftColumn][entityTopRow];
@@ -63,7 +60,6 @@ public class CollisionChecker {
     }
 
     public int checkEntity(Entity entity, Entity[] target) {
-
         int index = 999;
 
         for (int i = 0; i < target.length; i++) {
