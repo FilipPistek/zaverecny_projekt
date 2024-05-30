@@ -97,9 +97,9 @@ public class Entity {
         int screenY = worldY - game.player.worldY + game.player.screenY;
 
         if (worldX + game.tileSize > game.player.worldX - game.player.screenX &&
-            worldX - game.tileSize < game.player.worldX + game.player.screenX &&
-            worldY + game.tileSize > game.player.worldY - game.player.screenY &&
-            worldY - game.tileSize < game.player.worldY + game.player.screenY) {
+                worldX - game.tileSize < game.player.worldX + game.player.screenX &&
+                worldY + game.tileSize > game.player.worldY - game.player.screenY &&
+                worldY - game.tileSize < game.player.worldY + game.player.screenY) {
 
             BufferedImage image = null;
 

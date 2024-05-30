@@ -11,12 +11,11 @@ public class Sound {
     URL soundURL[] = new URL[10];
 
     public Sound() {
-        soundURL[0] = getClass().getResource("/sound/undertale_ruins.wav");
-        soundURL[1] = getClass().getResource("/sound/damage.wav");
-        soundURL[2] = getClass().getResource("/sound/healing.wav");
-        soundURL[3] = getClass().getResource("/sound/level_up.wav");
-        soundURL[4] = getClass().getResource("/sound/swing.wav");
-        soundURL[5] = getClass().getResource("/sound/spell.wav");
+        soundURL[0] = getClass().getResource("/sound/damage.wav");
+        soundURL[1] = getClass().getResource("/sound/healing.wav");
+        soundURL[2] = getClass().getResource("/sound/level_up.wav");
+        soundURL[3] = getClass().getResource("/sound/swing.wav");
+        soundURL[4] = getClass().getResource("/sound/spell.wav");
     }
 
     public void setFileSound(int i) {

@@ -16,8 +16,8 @@ public class Player extends Entity {
         super(game);
         this.keyBinds = keyBinds;
 
-        screenX = game.screenWidth/2 - game.tileSize/2;
-        screenY = game.screenHeight/2 - game.tileSize;
+        screenX = game.screenWidth / 2 - game.tileSize / 2;
+        screenY = game.screenHeight / 2 - game.tileSize;
 
         hitBox.x = 8;
         hitBox.y = 16;

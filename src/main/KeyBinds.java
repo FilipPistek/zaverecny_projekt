@@ -21,6 +21,32 @@ public class KeyBinds implements KeyListener {
     public void keyPressed(KeyEvent k) {
         int keyCode = k.getKeyCode();
 
+        if (game.gameState == game.titleState) {
+            if (keyCode == KeyEvent.VK_W) {
+                game.ui.command--;
+                if (game.ui.command < 0) {
+                    game.ui.command = 2;
+                }
+            }
+            if (keyCode == KeyEvent.VK_S) {
+                game.ui.command++;
+                if (game.ui.command > 2) {
+                    game.ui.command = 0;
+                }
+            }
+            if (keyCode == KeyEvent.VK_ENTER) {
+                if (game.ui.command == 0) {
+                    game.gameState = game.playState;
+                }
+                if (game.ui.command == 1) {
+
+                }
+                if (game.ui.command == 2) {
+                    System.exit(0);
+                }
+            }
+        }
+
         if (game.gameState == game.playState) {
             if (keyCode == KeyEvent.VK_W) {
                 up = true;
@@ -40,13 +66,11 @@ public class KeyBinds implements KeyListener {
             if (keyCode == KeyEvent.VK_E) {
                 e = true;
             }
-        }
-        else if (game.gameState == game.pauseState) {
+        } else if (game.gameState == game.pauseState) {
             if (keyCode == KeyEvent.VK_ESCAPE) {
                 game.gameState = game.playState;
             }
-        }
-        else if (game.gameState == game.talkingState) {
+        } else if (game.gameState == game.talkingState) {
             if (keyCode == KeyEvent.VK_E) {
                 game.gameState = game.playState;
             }

@@ -4,8 +4,13 @@ import entity.NPC;
 
 public class AssetSetup {
     Game game;
+
     public AssetSetup(Game game) {
         this.game = game;
+    }
+
+    public void setupObject() {
+
     }
 
     public void setupNPC() {

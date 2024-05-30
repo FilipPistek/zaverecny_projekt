@@ -20,19 +20,20 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldRow = 100;
     public int fps = 60;
     public int gameState;
-    public final int pauseState = 0;
-    public final int playState = 1;
-    public final int talkingState = 2;
+    public final int titleState = 0;
+    public final int pauseState = 1;
+    public final int playState = 2;
+    public final int talkingState = 3;
 
     Thread gameThread;
     public KeyBinds keyBinds = new KeyBinds(this);
     TileUtility tileUtility = new TileUtility(this);
-    Sound music = new Sound();
     Sound soundEffect = new Sound();
     public UI ui = new UI(this);
     AssetSetup assetSetup = new AssetSetup(this);
     public Player player = new Player(this, keyBinds);
     public Entity npc[] = new Entity[10];
+    public Object object[] = new Object[10];
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
@@ -50,9 +51,9 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        assetSetup.setupObject();
         assetSetup.setupNPC();
-        playMusic(0);
-        gameState = playState;
+        gameState = titleState;
     }
 
     @Override
@@ -101,26 +102,20 @@ public class Game extends JPanel implements Runnable {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        tileUtility.drawTile(graphics2D);
-        player.drawPlayer(graphics2D);
-        for (int i = 0; i < npc.length; i++) {
-            if (npc[i] != null) {
-                npc[i].draw(graphics2D);
+        if (gameState == titleState) {
+            ui.drawUI(graphics2D);
+        } else {
+            tileUtility.drawTile(graphics2D);
+            player.drawPlayer(graphics2D);
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    npc[i].draw(graphics2D);
+                }
             }
+            ui.drawUI(graphics2D);
+
+            graphics2D.dispose();
         }
-        ui.drawUI(graphics2D);
-
-        graphics2D.dispose();
-    }
-
-    public void playMusic(int i) {
-        music.setFileSound(i);
-        music.playSound();
-        music.loopSound();
-    }
-
-    public void stopMusic() {
-        music.stopSound();
     }
 
     public void playSoundEffect(int i) {

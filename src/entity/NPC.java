@@ -35,12 +35,12 @@ public class NPC extends Entity {
     }
 
     public void setDialogue() {
-        text[0] = "Hello. You look seem lost. You aren't from this place are you?";
-        text[1] = "By the way, the name's Arthur.";
+        text[0] = "Hello. You look seem lost. You aren't from this place are you? By the way, the name's Arthur.";
+        text[1] = "I have a quest for you, please kill those monsters.";
     }
 
     public void setAction() {
-        actionHold ++;
+        actionHold++;
 
         if (actionHold == 120) {
             Random random = new Random();
