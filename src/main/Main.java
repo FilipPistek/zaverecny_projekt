@@ -10,7 +10,7 @@ public class Main {
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("2D_RPG_Game");
+        window.setTitle("Hollow Squire");
 
         window.add(game);
         window.pack();

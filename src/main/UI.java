@@ -1,18 +1,27 @@
 package main;
 
+import object.ObjectMask;
+import object.ObjectUtility;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class UI {
 
     Game game;
     Graphics2D graphics2D;
     Font font;
+    BufferedImage fullMask, emptyMask;
     public String currentText = "";
     public  int command = 0;
 
     public UI(Game game) {
         this.game = game;
         font = new Font("Arial", Font.PLAIN, 40);
+
+        ObjectUtility mask = new ObjectMask(game);
+        fullMask = mask.image1;
+        emptyMask = mask.image2;
     }
 
     public void drawUI(Graphics2D graphics2D) {
@@ -26,24 +35,46 @@ public class UI {
         }
 
         if (game.gameState == game.playState) {
-
+            drawPlayerMasks();
         }
         if (game.gameState == game.pauseState) {
+            drawPlayerMasks();
             drawPausedScreen();
         }
         if (game.gameState == game.talkingState) {
+            drawPlayerMasks();
             drawTalkingScreen();
+        }
+    }
+
+    public void drawPlayerMasks() {
+        int x = game.tileSize/2;
+        int y = game.tileSize/2;
+        int i = 0;
+
+        while (i < game.player.maxLife) {
+            graphics2D.drawImage(emptyMask, x, y, null);
+            i++;
+            x += game.tileSize;
+        }
+
+        x = game.tileSize/2;
+        y = game.tileSize/2;
+        i = 0;
+
+        while (i < game.player.currentLife) {
+            graphics2D.drawImage(fullMask, x, y, null);
+            i++;
+            x += game.tileSize;
         }
     }
 
     public void drawTitleScreen() {
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 120F));
 
-        String text = "2D RPG GAME";
-        int x = game.screenWidth / 2 - (game.screenWidth / 48) * 17 - game.screenWidth / 96;
+        String text = "Hollow Squire";
+        int x = game.screenWidth / 2 - (game.screenWidth / 48) * 15 - game.screenWidth / 96;
         int y = game.tileSize * 3;
-        graphics2D.setColor(Color.gray);
-        graphics2D.drawString(text, x+4, y+4);
         graphics2D.setColor(Color.white);
         graphics2D.drawString(text, x, y);
 
@@ -53,30 +84,21 @@ public class UI {
 
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 60F));
 
-        text = "NEW GAME";
-        x = game.screenWidth / 2 - (game.screenWidth / 48) * 7 - game.screenWidth / 96;
+        text = "PLAY GAME";
+        x = game.screenWidth / 2 - (game.screenWidth / 48) * 7;
         y += game.tileSize * 5;
         graphics2D.drawString(text, x, y);
         if (command == 0) {
             graphics2D.drawString(">", x - game.tileSize, y);
         }
 
-        text = "LOAD GAME";
-        x = game.screenWidth / 2 - (game.screenWidth / 48) * 8;
+        text = "EXIT GAME";
+        x = game.screenWidth / 2 - (game.screenWidth / 48) * 6 - game.screenWidth / 96;
         y += game.tileSize * 2;
         graphics2D.drawString(text, x, y);
         if (command == 1) {
             graphics2D.drawString(">", x - game.tileSize, y);
         }
-
-        text = "QUIT";
-        x = game.screenWidth / 2 - (game.screenWidth / 48) * 3 - game.screenWidth / 96;
-        y += game.tileSize * 2;
-        graphics2D.drawString(text, x, y);
-        if (command == 2) {
-            graphics2D.drawString(">", x - game.tileSize, y);
-        }
-
     }
 
     public void drawPausedScreen() {

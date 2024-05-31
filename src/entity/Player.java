@@ -26,26 +26,29 @@ public class Player extends Entity {
         hitBox.width = 30;
         hitBox.height = 32;
 
-        setDefaultPosition();
+        setDefaultValues();
         getPlayerImage();
     }
 
-    public void setDefaultPosition() {
+    public void setDefaultValues() {
         worldX = game.tileSize * 25;
         worldY = game.tileSize * 30;
         movementSpeed = 3;
         direction = "down";
+
+        maxLife = 5;
+        currentLife = maxLife;
     }
 
     public void getPlayerImage() {
-        up1 = setupEntityImage("/player/knight_up_1");
-        up2 = setupEntityImage("/player/knight_up_2");
-        down1 = setupEntityImage("/player/knight_down_1");
-        down2 = setupEntityImage("/player/knight_down_2");
-        left1 = setupEntityImage("/player/knight_left_1");
-        left2 = setupEntityImage("/player/knight_left_2");
-        right1 = setupEntityImage("/player/knight_right_1");
-        right2 = setupEntityImage("/player/knight_right_2");
+        up1 = setupEntityImage("/squire/knight_up_1");
+        up2 = setupEntityImage("/squire/knight_up_2");
+        down1 = setupEntityImage("/squire/knight_down_1");
+        down2 = setupEntityImage("/squire/knight_down_2");
+        left1 = setupEntityImage("/squire/knight_left_1");
+        left2 = setupEntityImage("/squire/knight_left_2");
+        right1 = setupEntityImage("/squire/knight_right_1");
+        right2 = setupEntityImage("/squire/knight_right_2");
     }
 
     public void update() {

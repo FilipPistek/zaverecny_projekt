@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import object.ObjectUtility;
 import tile.TileUtility;
 
 import javax.swing.*;
@@ -33,7 +34,7 @@ public class Game extends JPanel implements Runnable {
     AssetSetup assetSetup = new AssetSetup(this);
     public Player player = new Player(this, keyBinds);
     public Entity npc[] = new Entity[10];
-    public Object object[] = new Object[10];
+    public ObjectUtility object[] = new ObjectUtility[10];
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
@@ -106,12 +107,21 @@ public class Game extends JPanel implements Runnable {
             ui.drawUI(graphics2D);
         } else {
             tileUtility.drawTile(graphics2D);
+
             player.drawPlayer(graphics2D);
+
+            for (int i = 0; i < object.length; i++) {
+                if (object[i] != null) {
+                    object[i].drawObject(graphics2D, this);
+                }
+            }
+
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
                     npc[i].draw(graphics2D);
                 }
             }
+
             ui.drawUI(graphics2D);
 
             graphics2D.dispose();

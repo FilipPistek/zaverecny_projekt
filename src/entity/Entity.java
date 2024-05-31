@@ -25,6 +25,9 @@ public class Entity {
     String text[] = new String[20];
     int textIndex = 0;
 
+    public int maxLife;
+    public int currentLife;
+
     public Entity(Game game) {
         this.game = game;
 

@@ -39,9 +39,6 @@ public class KeyBinds implements KeyListener {
                     game.gameState = game.playState;
                 }
                 if (game.ui.command == 1) {
-
-                }
-                if (game.ui.command == 2) {
                     System.exit(0);
                 }
             }

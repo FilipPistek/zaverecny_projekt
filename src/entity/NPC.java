@@ -24,19 +24,19 @@ public class NPC extends Entity {
     }
 
     public void getNPCImage() {
-        up1 = setupEntityImage("/player/knight_up_1");
-        up2 = setupEntityImage("/player/knight_up_2");
-        down1 = setupEntityImage("/player/knight_down_1");
-        down2 = setupEntityImage("/player/knight_down_2");
-        left1 = setupEntityImage("/player/knight_left_1");
-        left2 = setupEntityImage("/player/knight_left_2");
-        right1 = setupEntityImage("/player/knight_right_1");
-        right2 = setupEntityImage("/player/knight_right_2");
+        up1 = setupEntityImage("/squire/knight_up_1");
+        up2 = setupEntityImage("/squire/knight_up_2");
+        down1 = setupEntityImage("/squire/knight_down_1");
+        down2 = setupEntityImage("/squire/knight_down_2");
+        left1 = setupEntityImage("/squire/knight_left_1");
+        left2 = setupEntityImage("/squire/knight_left_2");
+        right1 = setupEntityImage("/squire/knight_right_1");
+        right2 = setupEntityImage("/squire/knight_right_2");
     }
 
     public void setDialogue() {
-        text[0] = "Hello. You look seem lost. You aren't from this place are you? By the way, the name's Arthur.";
-        text[1] = "I have a quest for you, please kill those monsters.";
+        text[0] = "Hello.";
+
     }
 
     public void setAction() {
