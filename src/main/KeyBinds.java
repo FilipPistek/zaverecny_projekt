@@ -8,6 +8,7 @@ public class KeyBinds implements KeyListener {
     Game game;
     public boolean up, down, left, right, e;
 
+    /**KeyBinds constructor**/
     public KeyBinds(Game game) {
         this.game = game;
     }
@@ -17,6 +18,7 @@ public class KeyBinds implements KeyListener {
 
     }
 
+    /**Method for player movement, arrow movement in menu, pause, interaction with npc**/
     @Override
     public void keyPressed(KeyEvent k) {
         int keyCode = k.getKeyCode();
@@ -60,7 +62,7 @@ public class KeyBinds implements KeyListener {
             if (keyCode == KeyEvent.VK_ESCAPE) {
                 game.gameState = game.pauseState;
             }
-            if (keyCode == KeyEvent.VK_E) {
+            if (keyCode == KeyEvent.VK_F) {
                 e = true;
             }
         } else if (game.gameState == game.pauseState) {
@@ -68,7 +70,7 @@ public class KeyBinds implements KeyListener {
                 game.gameState = game.playState;
             }
         } else if (game.gameState == game.talkingState) {
-            if (keyCode == KeyEvent.VK_E) {
+            if (keyCode == KeyEvent.VK_F) {
                 game.gameState = game.playState;
             }
         }

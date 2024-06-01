@@ -10,6 +10,7 @@ public class Sound {
     Clip clip;
     URL soundURL[] = new URL[10];
 
+    /**Sound constructor with file paths**/
     public Sound() {
         soundURL[0] = getClass().getResource("/sound/damage.wav");
         soundURL[1] = getClass().getResource("/sound/healing.wav");
@@ -18,6 +19,7 @@ public class Sound {
         soundURL[4] = getClass().getResource("/sound/spell.wav");
     }
 
+    /**Method for **/
     public void setFileSound(int i) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundURL[i]);
@@ -28,15 +30,8 @@ public class Sound {
         }
     }
 
+    /**Method for playing sound**/
     public void playSound() {
         clip.start();
-    }
-
-    public void loopSound() {
-        clip.loop(clip.LOOP_CONTINUOUSLY);
-    }
-
-    public void stopSound() {
-        clip.stop();
     }
 }

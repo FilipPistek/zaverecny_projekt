@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class DrawHelper {
 
+    /**Method for scaling default images**/
     public BufferedImage scaleImage(BufferedImage original, int width, int height) {
         BufferedImage scaledImage = new BufferedImage(width, height, original.getType());
         Graphics2D graphics2D = scaledImage.createGraphics();

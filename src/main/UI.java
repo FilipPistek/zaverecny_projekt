@@ -1,7 +1,7 @@
 package main;
 
-import object.ObjectMask;
-import object.ObjectUtility;
+import entities.Entity;
+import object.Mask;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,15 +15,17 @@ public class UI {
     public String currentText = "";
     public  int command = 0;
 
+    /**UI constructor**/
     public UI(Game game) {
         this.game = game;
         font = new Font("Arial", Font.PLAIN, 40);
 
-        ObjectUtility mask = new ObjectMask(game);
+        Entity mask = new Mask(game);
         fullMask = mask.image1;
         emptyMask = mask.image2;
     }
 
+    /**Method for drawing UI**/
     public void drawUI(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
 
@@ -43,10 +45,11 @@ public class UI {
         }
         if (game.gameState == game.talkingState) {
             drawPlayerMasks();
-            drawTalkingScreen();
+            drawInteractionScreen();
         }
     }
 
+    /**Method for drawing player's health**/
     public void drawPlayerMasks() {
         int x = game.tileSize/2;
         int y = game.tileSize/2;
@@ -69,6 +72,7 @@ public class UI {
         }
     }
 
+    /**Method for drawing title screen (menu)**/
     public void drawTitleScreen() {
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 120F));
 
@@ -101,6 +105,7 @@ public class UI {
         }
     }
 
+    /**Method for drawing string "paused"**/
     public void drawPausedScreen() {
         String text = "PAUSED";
         int x = game.screenWidth / 2 - (game.screenWidth / 48) * 3 - game.screenWidth / 96;
@@ -109,7 +114,8 @@ public class UI {
         graphics2D.drawString(text, x, y);
     }
 
-    public void drawTalkingScreen() {
+    /**Method for drawing interaction screen**/
+    public void drawInteractionScreen() {
         int x = game.tileSize * 2;
         int y = game.tileSize / 2;
         int width = game.screenWidth - (game.tileSize * 4);
@@ -127,6 +133,7 @@ public class UI {
 
     }
 
+    /**Method for drawing supportive window**/
     public void drawSuppWindow(int x, int y, int width, int height) {
         Color color = new Color(0, 0, 0, 180);
         graphics2D.setColor(color);

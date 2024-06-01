@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 import main.Game;
 
@@ -6,39 +6,37 @@ import java.util.Random;
 
 public class NPC extends Entity {
 
+    /**NPC constructor**/
     public NPC(Game game) {
         super(game);
 
         direction = "down";
-        movementSpeed = 0;
+        movementSpeed = 1;
 
-        hitBox.x = 8;
-        hitBox.y = 16;
-        hitBoxDefaultX = hitBox.x;
-        hitBoxDefaultY = hitBox.y;
-        hitBox.width = 30;
-        hitBox.height = 32;
 
         getNPCImage();
         setDialogue();
     }
 
+    /**Method for getting path for images for npc**/
     public void getNPCImage() {
-        up1 = setupEntityImage("/squire/knight_up_1");
-        up2 = setupEntityImage("/squire/knight_up_2");
-        down1 = setupEntityImage("/squire/knight_down_1");
-        down2 = setupEntityImage("/squire/knight_down_2");
-        left1 = setupEntityImage("/squire/knight_left_1");
-        left2 = setupEntityImage("/squire/knight_left_2");
-        right1 = setupEntityImage("/squire/knight_right_1");
-        right2 = setupEntityImage("/squire/knight_right_2");
+        up1 = setupEntityImage("/player/squire_up_1");
+        up2 = setupEntityImage("/player/squire_up_2");
+        down1 = setupEntityImage("/player/squire_down_1");
+        down2 = setupEntityImage("/player/squire_down_2");
+        left1 = setupEntityImage("/player/squire_left_1");
+        left2 = setupEntityImage("/player/squire_left_2");
+        right1 = setupEntityImage("/player/squire_right_1");
+        right2 = setupEntityImage("/player/squire_right_2");
     }
 
+    /**Method for setting what npc says**/
     public void setDialogue() {
-        text[0] = "Hello.";
+        text[0] = "";
 
     }
 
+    /**Method for npc AI**/
     public void setAction() {
         actionHold++;
 
@@ -62,6 +60,7 @@ public class NPC extends Entity {
         }
     }
 
+    /**Super method from Entity class**/
     public void speak() {
         super.speak();
     }

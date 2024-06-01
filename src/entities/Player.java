@@ -1,10 +1,7 @@
-package entity;
+package entities;
 
 import main.KeyBinds;
 import main.Game;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     KeyBinds keyBinds;
@@ -12,6 +9,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    /**Player constructor**/
     public Player(Game game, KeyBinds keyBinds) {
         super(game);
         this.keyBinds = keyBinds;
@@ -19,20 +17,14 @@ public class Player extends Entity {
         screenX = game.screenWidth / 2 - game.tileSize / 2;
         screenY = game.screenHeight / 2 - game.tileSize;
 
-        hitBox.x = 8;
-        hitBox.y = 16;
-        hitBoxDefaultX = hitBox.x;
-        hitBoxDefaultY = hitBox.y;
-        hitBox.width = 30;
-        hitBox.height = 32;
-
         setDefaultValues();
         getPlayerImage();
     }
 
+    /**Method for player values and spawn location**/
     public void setDefaultValues() {
-        worldX = game.tileSize * 25;
-        worldY = game.tileSize * 30;
+        worldX = game.tileSize * 15;
+        worldY = game.tileSize * 37;
         movementSpeed = 3;
         direction = "down";
 
@@ -40,17 +32,19 @@ public class Player extends Entity {
         currentLife = maxLife;
     }
 
+    /**Method for getting path for player images**/
     public void getPlayerImage() {
-        up1 = setupEntityImage("/squire/knight_up_1");
-        up2 = setupEntityImage("/squire/knight_up_2");
-        down1 = setupEntityImage("/squire/knight_down_1");
-        down2 = setupEntityImage("/squire/knight_down_2");
-        left1 = setupEntityImage("/squire/knight_left_1");
-        left2 = setupEntityImage("/squire/knight_left_2");
-        right1 = setupEntityImage("/squire/knight_right_1");
-        right2 = setupEntityImage("/squire/knight_right_2");
+        up1 = setupEntityImage("/player/squire_up_1");
+        up2 = setupEntityImage("/player/squire_up_2");
+        down1 = setupEntityImage("/player/squire_down_1");
+        down2 = setupEntityImage("/player/squire_down_2");
+        left1 = setupEntityImage("/player/squire_left_1");
+        left2 = setupEntityImage("/player/squire_left_2");
+        right1 = setupEntityImage("/player/squire_right_1");
+        right2 = setupEntityImage("/player/squire_right_2");
     }
 
+    /**Method for updating player images**/
     public void update() {
         if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true) {
 
@@ -72,6 +66,8 @@ public class Player extends Entity {
 
             int npcIndex = game.collisionChecker.checkEntity(this, game.npc);
             npcInteraction(npcIndex);
+
+            int monsterIndex = game.collisionChecker.checkEntity(this, game.monster);
 
             if (entityCollision == false) {
                 switch (direction) {
@@ -102,6 +98,7 @@ public class Player extends Entity {
         }
     }
 
+    /**Method for interaction with npc**/
     public void npcInteraction(int i) {
         if (i != 999) {
             if (game.keyBinds.e == true) {
@@ -110,45 +107,5 @@ public class Player extends Entity {
             }
         }
         game.keyBinds.e = false;
-    }
-
-    public void drawPlayer(Graphics2D graphics2D) {
-        BufferedImage image = null;
-
-        switch (direction) {
-            case "up":
-                if (imageNumber == 1) {
-                    image = up1;
-                }
-                if (imageNumber == 2) {
-                    image = up2;
-                }
-                break;
-            case "down":
-                if (imageNumber == 1) {
-                    image = down1;
-                }
-                if (imageNumber == 2) {
-                    image = down2;
-                }
-                break;
-            case "left":
-                if (imageNumber == 1) {
-                    image = left1;
-                }
-                if (imageNumber == 2) {
-                    image = left2;
-                }
-                break;
-            case "right":
-                if (imageNumber == 1) {
-                    image = right1;
-                }
-                if (imageNumber == 2) {
-                    image = right2;
-                }
-                break;
-        }
-        graphics2D.drawImage(image, screenX, screenY, null);
     }
 }

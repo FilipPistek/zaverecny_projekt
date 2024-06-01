@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 import main.DrawHelper;
 import main.Game;
@@ -15,7 +15,7 @@ public class Entity {
     public int worldX, worldY;
     public int movementSpeed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direction;
+    public String direction = "down";
     public int imageCounter = 0;
     public int imageNumber = 1;
     public Rectangle hitBox;
@@ -23,21 +23,29 @@ public class Entity {
     public boolean entityCollision = false;
     public int actionHold = 0;
     String text[] = new String[20];
+    public BufferedImage image, image1, image2;
+    public String name;
+    public boolean objectCollision = false;
     int textIndex = 0;
-
     public int maxLife;
     public int currentLife;
 
+    /**Entity constructor**/
     public Entity(Game game) {
         this.game = game;
 
         hitBox = new Rectangle();
+        hitBox.x = 8;
+        hitBox.y = 16;
+        hitBox.width = 32;
+        hitBox.height = 32;
     }
 
     public void setAction() {
 
     }
 
+    /**Method for interaction with npc**/
     public void speak() {
         if (text[textIndex] == null) {
             textIndex = 0;
@@ -61,10 +69,13 @@ public class Entity {
         }
     }
 
+    /**Method for updating entity images**/
     public void update() {
         setAction();
         entityCollision = false;
         game.collisionChecker.checkTile(this);
+        game.collisionChecker.checkEntity(this, game.npc);
+        game.collisionChecker.checkEntity(this, game.monster);
         game.collisionChecker.checkPlayer(this);
 
         if (entityCollision == false) {
@@ -95,7 +106,8 @@ public class Entity {
         }
     }
 
-    public void draw(Graphics2D graphics2D) {
+    /**Method for drawing entity**/
+    public void drawEntity(Graphics2D graphics2D) {
         int screenX = worldX - game.player.worldX + game.player.screenX;
         int screenY = worldY - game.player.worldY + game.player.screenY;
 
@@ -145,6 +157,7 @@ public class Entity {
         }
     }
 
+    /**Method for better drawing images**/
     public BufferedImage setupEntityImage(String ImageName) {
         DrawHelper drawHelper = new DrawHelper();
         BufferedImage image = null;

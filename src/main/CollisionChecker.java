@@ -1,15 +1,17 @@
 package main;
 
-import entity.Entity;
+import entities.Entity;
 
 public class CollisionChecker {
 
     Game game;
 
+    /**CollisionChecker constructor**/
     public CollisionChecker(Game game) {
         this.game = game;
     }
 
+    /**Method for checking collisions with tiles**/
     public void checkTile(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.hitBox.x;
         int entityRightWorldX = entity.worldX + entity.hitBox.x + entity.hitBox.width;
@@ -59,6 +61,7 @@ public class CollisionChecker {
         }
     }
 
+    /**Method for checking collisions (player to entity)**/
     public int checkEntity(Entity entity, Entity[] target) {
         int index = 999;
 
@@ -73,42 +76,34 @@ public class CollisionChecker {
                 switch (entity.direction) {
                     case "up":
                         entity.hitBox.y -= entity.movementSpeed;
-                        if (entity.hitBox.intersects(target[i].hitBox)) {
-                            entity.entityCollision = true;
-                            index = i;
-                            break;
-                        }
+                        break;
                     case "down":
                         entity.hitBox.y += entity.movementSpeed;
-                        if (entity.hitBox.intersects(target[i].hitBox)) {
-                            entity.entityCollision = true;
-                            index = i;
-                            break;
-                        }
+                        break;
                     case "left":
                         entity.hitBox.x -= entity.movementSpeed;
-                        if (entity.hitBox.intersects(target[i].hitBox)) {
-                            entity.entityCollision = true;
-                            index = i;
-                            break;
-                        }
+                        break;
                     case "right":
                         entity.hitBox.x += entity.movementSpeed;
-                        if (entity.hitBox.intersects(target[i].hitBox)) {
-                            entity.entityCollision = true;
-                            index = i;
-                            break;
-                        }
-                        entity.hitBox.x = entity.hitBoxDefaultX;
-                        entity.hitBox.y = entity.hitBoxDefaultY;
-                        target[i].hitBox.x = target[i].hitBoxDefaultX;
-                        target[i].hitBox.y = target[i].hitBoxDefaultY;
+                        break;
                 }
+                if (entity.hitBox.intersects(target[i].hitBox)) {
+                    if (target[i] != entity) {
+                        entity.entityCollision = true;
+                        index = i;
+                    }
+
+                }
+                entity.hitBox.x = entity.hitBoxDefaultX;
+                entity.hitBox.y = entity.hitBoxDefaultY;
+                target[i].hitBox.x = target[i].hitBoxDefaultX;
+                target[i].hitBox.y = target[i].hitBoxDefaultY;
             }
         }
         return index;
     }
 
+    /**Method for checking collisions (entity to player)**/
     public void checkPlayer(Entity entity) {
 
         entity.hitBox.x = entity.worldX + entity.hitBox.x;

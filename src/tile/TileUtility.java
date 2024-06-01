@@ -16,27 +16,30 @@ public class TileUtility {
     public Tile[] tile;
     public int mapTileXY[][];
 
+    /**TileUtility constructor**/
     public TileUtility(Game game) {
         this.game = game;
         tile = new Tile[10];
         mapTileXY = new int[game.maxWorldColumn][game.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/world_map.txt");
+        loadMap("/maps/map_1.txt");
     }
 
+    /**Method for getting tile images via their index**/
     public void getTileImage() {
-        setupTileImage(0, "grass", false);
-        setupTileImage(1, "dirt", false);
-        setupTileImage(2, "pine_tree", true);
+        setupTileImage(0, "dark_rock", false);
+        setupTileImage(1, "dark_rock_spikes", false);
+        setupTileImage(2, "dark_rock_wall", true);
     }
 
+    /**Method for better path finding for tile images**/
     public void setupTileImage(int index, String name, boolean collision) {
         DrawHelper drawHelper = new DrawHelper();
 
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tile/" + name + ".png"));
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + name + ".png"));
             tile[index].image = drawHelper.scaleImage(tile[index].image, game.tileSize, game.tileSize);
             tile[index].tileCollision = collision;
 
@@ -45,6 +48,7 @@ public class TileUtility {
         }
     }
 
+    /**Method for loading map from .txt file**/
     public void loadMap(String filePath) {
         try {
             InputStream inputStream = getClass().getResourceAsStream(filePath);
@@ -74,6 +78,7 @@ public class TileUtility {
         }
     }
 
+    /**Method for drawing tiles**/
     public void drawTile(Graphics2D graphics2D) {
         int worldColumn = 0;
         int worldRow = 0;
