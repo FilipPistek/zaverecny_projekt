@@ -10,7 +10,6 @@ public class NPC extends Entity {
     public NPC(Game game) {
         super(game);
 
-        direction = "down";
         movementSpeed = 1;
 
 
@@ -32,7 +31,8 @@ public class NPC extends Entity {
 
     /**Method for setting what npc says**/
     public void setDialogue() {
-        text[0] = "hello.";
+        text[0] = "Hello stranger.";
+        text[1] = "Could you please kill those slimes?";
 
     }
 

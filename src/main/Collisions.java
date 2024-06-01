@@ -92,7 +92,6 @@ public class Collisions {
                         entity.entityCollision = true;
                         index = i;
                     }
-
                 }
                 entity.hitBox.x = entity.hitBoxDefaultX;
                 entity.hitBox.y = entity.hitBoxDefaultY;

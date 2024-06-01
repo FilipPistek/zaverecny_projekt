@@ -31,7 +31,6 @@ public class Game extends JPanel implements Runnable {
     Thread gameThread;
     public KeyBinds keyBinds = new KeyBinds(this);
     TileUtility tileUtility = new TileUtility(this);
-    Sound soundEffect = new Sound();
     public UI ui = new UI(this);
     Assets assets = new Assets(this);
     public Collisions collisions = new Collisions(this);
@@ -152,19 +151,11 @@ public class Game extends JPanel implements Runnable {
             for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).drawEntity(graphics2D);
             }
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.remove(i);
-            }
+            entityList.clear();
 
             ui.drawUI(graphics2D);
 
             graphics2D.dispose();
         }
-    }
-
-    /**Method for playing sound effects**/
-    public void playSoundEffect(int i) {
-        soundEffect.setFileSound(i);
-        soundEffect.playSound();
     }
 }

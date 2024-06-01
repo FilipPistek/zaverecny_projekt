@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyBinds implements KeyListener {
 
     Game game;
-    public boolean up, down, left, right, e;
+    public boolean up, down, left, right, f;
 
     /**KeyBinds constructor**/
     public KeyBinds(Game game) {
@@ -63,7 +63,7 @@ public class KeyBinds implements KeyListener {
                 game.gameState = game.pauseState;
             }
             if (keyCode == KeyEvent.VK_F) {
-                e = true;
+                f = true;
             }
         } else if (game.gameState == game.pauseState) {
             if (keyCode == KeyEvent.VK_ESCAPE) {

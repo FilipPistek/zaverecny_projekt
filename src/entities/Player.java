@@ -46,7 +46,7 @@ public class Player extends Entity {
 
     /**Method for updating player images**/
     public void update() {
-        if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true) {
+        if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true || keyBinds.f == true) {
 
             if (keyBinds.up == true) {
                 direction = "up";
@@ -70,7 +70,7 @@ public class Player extends Entity {
             int monsterIndex = game.collisions.checkEntity(this, game.monster);
             monsterContact(monsterIndex);
 
-            if (entityCollision == false) {
+            if (entityCollision == false && keyBinds.f == false) {
                 switch (direction) {
                     case "up":
                         worldY -= movementSpeed;
@@ -86,6 +86,8 @@ public class Player extends Entity {
                         break;
                 }
             }
+
+            game.keyBinds.f = false;
 
             imageCounter++;
             if (imageCounter > 10) {
@@ -109,12 +111,12 @@ public class Player extends Entity {
     /**Method for interaction with npc**/
     public void npcInteraction(int i) {
         if (i != 999) {
-            if (game.keyBinds.e == true) {
+            if (game.keyBinds.f == true) {
                 game.gameState = game.talkingState;
                 game.npc[i].speak();
             }
         }
-        game.keyBinds.e = false;
+        game.keyBinds.f = false;
     }
 
     /**Method for player taking damage when in collision with monster**/
