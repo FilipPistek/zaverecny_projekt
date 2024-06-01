@@ -15,6 +15,7 @@ public class Entity {
     public int worldX, worldY;
     public int movementSpeed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String direction = "down";
     public int imageCounter = 0;
     public int imageNumber = 1;
@@ -22,14 +23,15 @@ public class Entity {
     public int hitBoxDefaultX, hitBoxDefaultY;
     public boolean entityCollision = false;
     public int actionHold = 0;
-    String text[] = new String[20];
+    public String text[] = new String[20];
     public BufferedImage image1, image2;
     public String name;
-    int textIndex = 0;
+    public int textIndex = 0;
     public int maxLife;
     public int currentLife;
     public boolean untargetable = false;
     public int untargetableCounter = 0;
+    public boolean attacking = false;
     public int type;
 
     /**Entity constructor**/
@@ -167,13 +169,13 @@ public class Entity {
     }
 
     /**Method for better drawing images**/
-    public BufferedImage setupEntityImage(String ImageName) {
+    public BufferedImage setupEntityImage(String ImageName, int width, int height) {
         DrawHelper drawHelper = new DrawHelper();
         BufferedImage image = null;
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream(ImageName + ".png"));
-            image = drawHelper.scaleImage(image, game.tileSize, game.tileSize);
+            image = drawHelper.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();
         }

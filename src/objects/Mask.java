@@ -11,7 +11,7 @@ public class Mask extends Entity {
     public Mask(Game game) {
         super(game);
         name = "Mask";
-        image1 = setupEntityImage("/objects/mask");
-        image2 = setupEntityImage("/objects/empty_mask");
+        image1 = setupEntityImage("/objects/mask", game.tileSize, game.tileSize);
+        image2 = setupEntityImage("/objects/empty_mask", game.tileSize, game.tileSize);
     }
 }

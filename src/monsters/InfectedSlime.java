@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class InfectedSlime extends Entity {
 
+    Game game;
+
     public InfectedSlime(Game game) {
         super(game);
 
@@ -19,14 +21,14 @@ public class InfectedSlime extends Entity {
     }
 
     public void getMonsterImage() {
-        up1 = setupEntityImage("/monsters/infected_slime_1");
-        up2 = setupEntityImage("/monsters/infected_slime_2");
-        down1 = setupEntityImage("/monsters/infected_slime_1");
-        down2 = setupEntityImage("/monsters/infected_slime_2");
-        left1 = setupEntityImage("/monsters/infected_slime_1");
-        left2 = setupEntityImage("/monsters/infected_slime_2");
-        right1 = setupEntityImage("/monsters/infected_slime_1");
-        right2 = setupEntityImage("/monsters/infected_slime_2");
+        up1 = setupEntityImage("/monsters/infected_slime_1", game.tileSize, game.tileSize);
+        up2 = setupEntityImage("/monsters/infected_slime_2", game.tileSize, game.tileSize);
+        down1 = setupEntityImage("/monsters/infected_slime_1", game.tileSize, game.tileSize);
+        down2 = setupEntityImage("/monsters/infected_slime_2", game.tileSize, game.tileSize);
+        left1 = setupEntityImage("/monsters/infected_slime_1", game.tileSize, game.tileSize);
+        left2 = setupEntityImage("/monsters/infected_slime_2", game.tileSize, game.tileSize);
+        right1 = setupEntityImage("/monsters/infected_slime_1", game.tileSize, game.tileSize);
+        right2 = setupEntityImage("/monsters/infected_slime_2", game.tileSize, game.tileSize);
     }
 
     public void setAction() {

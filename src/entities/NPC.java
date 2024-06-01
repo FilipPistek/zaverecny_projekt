@@ -19,14 +19,14 @@ public class NPC extends Entity {
 
     /**Method for getting path for images for npc**/
     public void getNPCImage() {
-        up1 = setupEntityImage("/player/squire_up_1");
-        up2 = setupEntityImage("/player/squire_up_2");
-        down1 = setupEntityImage("/player/squire_down_1");
-        down2 = setupEntityImage("/player/squire_down_2");
-        left1 = setupEntityImage("/player/squire_left_1");
-        left2 = setupEntityImage("/player/squire_left_2");
-        right1 = setupEntityImage("/player/squire_right_1");
-        right2 = setupEntityImage("/player/squire_right_2");
+        up1 = setupEntityImage("/player/squire_up_1", game.tileSize, game.tileSize);
+        up2 = setupEntityImage("/player/squire_up_2", game.tileSize, game.tileSize);
+        down1 = setupEntityImage("/player/squire_down_1", game.tileSize, game.tileSize);
+        down2 = setupEntityImage("/player/squire_down_2", game.tileSize, game.tileSize);
+        left1 = setupEntityImage("/player/squire_left_1", game.tileSize, game.tileSize);
+        left2 = setupEntityImage("/player/squire_left_2", game.tileSize, game.tileSize);
+        right1 = setupEntityImage("/player/squire_right_1", game.tileSize, game.tileSize);
+        right2 = setupEntityImage("/player/squire_right_2", game.tileSize, game.tileSize);
     }
 
     /**Method for setting what npc says**/

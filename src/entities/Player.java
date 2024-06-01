@@ -3,6 +3,8 @@ package entities;
 import main.KeyBinds;
 import main.Game;
 
+import java.awt.*;
+
 public class Player extends Entity {
     KeyBinds keyBinds;
 
@@ -19,6 +21,7 @@ public class Player extends Entity {
 
         setDefaultValues();
         getPlayerImage();
+        getPlayerAttackImage();
     }
 
     /**Method for player values and spawn location**/
@@ -34,18 +37,34 @@ public class Player extends Entity {
 
     /**Method for getting path for player images**/
     public void getPlayerImage() {
-        up1 = setupEntityImage("/player/squire_up_1");
-        up2 = setupEntityImage("/player/squire_up_2");
-        down1 = setupEntityImage("/player/squire_down_1");
-        down2 = setupEntityImage("/player/squire_down_2");
-        left1 = setupEntityImage("/player/squire_left_1");
-        left2 = setupEntityImage("/player/squire_left_2");
-        right1 = setupEntityImage("/player/squire_right_1");
-        right2 = setupEntityImage("/player/squire_right_2");
+        up1 = setupEntityImage("/player/squire_up_1", game.tileSize, game.tileSize);
+        up2 = setupEntityImage("/player/squire_up_2", game.tileSize, game.tileSize);
+        down1 = setupEntityImage("/player/squire_down_1", game.tileSize, game.tileSize);
+        down2 = setupEntityImage("/player/squire_down_2", game.tileSize, game.tileSize);
+        left1 = setupEntityImage("/player/squire_left_1", game.tileSize, game.tileSize);
+        left2 = setupEntityImage("/player/squire_left_2", game.tileSize, game.tileSize);
+        right1 = setupEntityImage("/player/squire_right_1", game.tileSize, game.tileSize);
+        right2 = setupEntityImage("/player/squire_right_2", game.tileSize, game.tileSize);
+    }
+
+    /**Method for getting path for player attacking images**/
+    public void getPlayerAttackImage() {
+        attackUp1 = setupEntityImage("/player/squire_up_1", game.tileSize, game.tileSize * 2);
+        attackUp2 = setupEntityImage("/player/squire_up_2", game.tileSize, game.tileSize * 2);
+        attackDown1 = setupEntityImage("/player/squire_down_1", game.tileSize, game.tileSize * 2);
+        attackDown2 = setupEntityImage("/player/squire_down_2", game.tileSize, game.tileSize * 2);
+        attackLeft1 = setupEntityImage("/player/squire_left_1", game.tileSize, game.tileSize * 2);
+        attackLeft2 = setupEntityImage("/player/squire_left_2", game.tileSize, game.tileSize * 2);
+        attackRight1 = setupEntityImage("/player/squire_right_1", game.tileSize, game.tileSize * 2);
+        attackRight2 = setupEntityImage("/player/squire_right_2", game.tileSize, game.tileSize * 2);
     }
 
     /**Method for updating player images**/
     public void update() {
+        if (attacking == true) {
+            attacking();
+        }
+
         if (keyBinds.up == true || keyBinds.down == true || keyBinds.left == true || keyBinds.right == true || keyBinds.f == true) {
 
             if (keyBinds.up == true) {
@@ -108,15 +127,33 @@ public class Player extends Entity {
         }
     }
 
+    public void attacking() {
+        imageCounter++;
+
+        if (imageCounter <= 5) {
+            imageNumber = 1;
+        }
+        if (imageCounter > 5 && imageCounter <= 25) {
+            imageNumber = 2;
+        }
+        if (imageCounter > 25) {
+            imageNumber = 1;
+            imageCounter = 0;
+            attacking = false;
+        }
+    }
+
     /**Method for interaction with npc**/
     public void npcInteraction(int i) {
-        if (i != 999) {
-            if (game.keyBinds.f == true) {
+        if (game.keyBinds.f == true) {
+            if (i != 999) {
                 game.gameState = game.talkingState;
                 game.npc[i].speak();
             }
+        } else {
+            attacking = true;
         }
-        game.keyBinds.f = false;
+
     }
 
     /**Method for player taking damage when in collision with monster**/
