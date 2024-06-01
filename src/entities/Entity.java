@@ -23,12 +23,14 @@ public class Entity {
     public boolean entityCollision = false;
     public int actionHold = 0;
     String text[] = new String[20];
-    public BufferedImage image, image1, image2;
+    public BufferedImage image1, image2;
     public String name;
-    public boolean objectCollision = false;
     int textIndex = 0;
     public int maxLife;
     public int currentLife;
+    public boolean untargetable = false;
+    public int untargetableCounter = 0;
+    public int type;
 
     /**Entity constructor**/
     public Entity(Game game) {
@@ -73,10 +75,17 @@ public class Entity {
     public void update() {
         setAction();
         entityCollision = false;
-        game.collisionChecker.checkTile(this);
-        game.collisionChecker.checkEntity(this, game.npc);
-        game.collisionChecker.checkEntity(this, game.monster);
-        game.collisionChecker.checkPlayer(this);
+        game.collisions.checkTile(this);
+        game.collisions.checkEntity(this, game.npc);
+        game.collisions.checkEntity(this, game.monster);
+        boolean playerContact = game.collisions.checkPlayer(this);
+
+        if (this.type == 2 && playerContact == true) {
+            if (game.player.untargetable == false) {
+                game.player.currentLife -= 2;
+                game.player.untargetable = true;
+            }
+        }
 
         if (entityCollision == false) {
             switch (direction) {

@@ -62,12 +62,13 @@ public class Player extends Entity {
             }
 
             entityCollision = false;
-            game.collisionChecker.checkTile(this);
+            game.collisions.checkTile(this);
 
-            int npcIndex = game.collisionChecker.checkEntity(this, game.npc);
+            int npcIndex = game.collisions.checkEntity(this, game.npc);
             npcInteraction(npcIndex);
 
-            int monsterIndex = game.collisionChecker.checkEntity(this, game.monster);
+            int monsterIndex = game.collisions.checkEntity(this, game.monster);
+            monsterContact(monsterIndex);
 
             if (entityCollision == false) {
                 switch (direction) {
@@ -96,6 +97,13 @@ public class Player extends Entity {
                 imageCounter = 0;
             }
         }
+        if (untargetable == true) {
+             untargetableCounter++;
+             if (untargetableCounter > 60) {
+                 untargetable = false;
+                 untargetableCounter = 0;
+             }
+        }
     }
 
     /**Method for interaction with npc**/
@@ -107,5 +115,15 @@ public class Player extends Entity {
             }
         }
         game.keyBinds.e = false;
+    }
+
+    /**Method for player taking damage when in collision with monster**/
+    public void monsterContact(int i) {
+        if (i != 999) {
+            if (untargetable == false) {
+                currentLife -=1;
+                untargetable = true;
+            }
+        }
     }
 }

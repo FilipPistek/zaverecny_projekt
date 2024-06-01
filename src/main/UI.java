@@ -1,7 +1,7 @@
 package main;
 
 import entities.Entity;
-import object.Mask;
+import objects.Mask;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -13,8 +13,7 @@ public class InfectedSlime extends Entity {
         movementSpeed = 1;
         maxLife = 3;
         currentLife = maxLife;
-
-
+        type = 2;
 
         getMonsterImage();
     }

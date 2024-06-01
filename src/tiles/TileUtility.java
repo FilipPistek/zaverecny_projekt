@@ -1,4 +1,4 @@
-package tile;
+package tiles;
 
 import main.DrawHelper;
 import main.Game;

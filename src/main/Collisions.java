@@ -2,12 +2,12 @@ package main;
 
 import entities.Entity;
 
-public class CollisionChecker {
+public class Collisions {
 
     Game game;
 
     /**CollisionChecker constructor**/
-    public CollisionChecker(Game game) {
+    public Collisions(Game game) {
         this.game = game;
     }
 
@@ -104,7 +104,8 @@ public class CollisionChecker {
     }
 
     /**Method for checking collisions (entity to player)**/
-    public void checkPlayer(Entity entity) {
+    public boolean checkPlayer(Entity entity) {
+        boolean playerContact = false;
 
         entity.hitBox.x = entity.worldX + entity.hitBox.x;
         entity.hitBox.y = entity.worldY + entity.hitBox.y;
@@ -115,32 +116,28 @@ public class CollisionChecker {
         switch (entity.direction) {
             case "up":
                 entity.hitBox.y -= entity.movementSpeed;
-                if (entity.hitBox.intersects(game.player.hitBox)) {
-                    entity.entityCollision = true;
-                    break;
-                }
+                break;
             case "down":
                 entity.hitBox.y += entity.movementSpeed;
-                if (entity.hitBox.intersects(game.player.hitBox)) {
-                    entity.entityCollision = true;
-                    break;
-                }
+                break;
             case "left":
                 entity.hitBox.x -= entity.movementSpeed;
-                if (entity.hitBox.intersects(game.player.hitBox)) {
-                    entity.entityCollision = true;
-                    break;
-                }
+                break;
             case "right":
                 entity.hitBox.x += entity.movementSpeed;
-                if (entity.hitBox.intersects(game.player.hitBox)) {
-                    entity.entityCollision = true;
-                    break;
-                }
-                entity.hitBox.x = entity.hitBoxDefaultX;
-                entity.hitBox.y = entity.hitBoxDefaultY;
-                game.player.hitBox.x = game.player.hitBoxDefaultX;
-                game.player.hitBox.y = game.player.hitBoxDefaultY;
+                break;
         }
+
+        if (entity.hitBox.intersects(game.player.hitBox)) {
+            entity.entityCollision = true;
+            playerContact = true;
+        }
+
+        entity.hitBox.x = entity.hitBoxDefaultX;
+        entity.hitBox.y = entity.hitBoxDefaultY;
+        game.player.hitBox.x = game.player.hitBoxDefaultX;
+        game.player.hitBox.y = game.player.hitBoxDefaultY;
+
+        return playerContact;
     }
 }

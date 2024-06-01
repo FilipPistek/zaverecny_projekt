@@ -2,7 +2,7 @@ package main;
 
 import entities.Entity;
 import entities.Player;
-import tile.TileUtility;
+import tiles.TileUtility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,8 +33,8 @@ public class Game extends JPanel implements Runnable {
     TileUtility tileUtility = new TileUtility(this);
     Sound soundEffect = new Sound();
     public UI ui = new UI(this);
-    AssetSetup assetSetup = new AssetSetup(this);
-    public CollisionChecker collisionChecker = new CollisionChecker(this);
+    Assets assets = new Assets(this);
+    public Collisions collisions = new Collisions(this);
     public Player player = new Player(this, keyBinds);
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
@@ -58,9 +58,9 @@ public class Game extends JPanel implements Runnable {
 
     /**Method for setting up the game**/
     public void setupGame() {
-        assetSetup.setupObject();
-        assetSetup.setupNPC();
-        assetSetup.setupMonster();
+        assets.setupObject();
+        assets.setupNPC();
+        assets.setupMonster();
         gameState = titleState;
     }
 

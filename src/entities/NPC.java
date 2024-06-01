@@ -32,7 +32,7 @@ public class NPC extends Entity {
 
     /**Method for setting what npc says**/
     public void setDialogue() {
-        text[0] = "";
+        text[0] = "hello.";
 
     }
 

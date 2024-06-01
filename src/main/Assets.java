@@ -3,11 +3,11 @@ package main;
 import entities.NPC;
 import monsters.InfectedSlime;
 
-public class AssetSetup {
+public class Assets {
     Game game;
 
     /**AssetSetup constructor**/
-    public AssetSetup(Game game) {
+    public Assets(Game game) {
         this.game = game;
     }
 
